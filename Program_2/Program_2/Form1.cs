@@ -6,7 +6,6 @@ namespace Program_2
 {
     public partial class Form1 : Form
     {
-        // Змінна тепер nullable
         private Bitmap? originalImage;
 
         public Form1()
@@ -14,23 +13,21 @@ namespace Program_2
             InitializeComponent();
         }
 
-        // Відкриття зображення
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog openDialog = new OpenFileDialog();
-            openDialog.Filter = "Зображення (*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp";
+            openDialog.Filter = "Г‡Г®ГЎГ°Г Г¦ГҐГ­Г­Гї (*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp";
 
             if (openDialog.ShowDialog() == DialogResult.OK)
             {
-                originalImage = new Bitmap(openDialog.FileName);  // Завантажуємо зображення
-                pictureBox1.Image = originalImage;  // Відображаємо в PictureBox
+                originalImage = new Bitmap(openDialog.FileName); 
+                pictureBox1.Image = originalImage;
             }
         }
 
-        // Перетворення зображення в відтінки сірого
         private void button2_Click(object sender, EventArgs e)
         {
-            if (originalImage == null) return;  // Перевірка на null
+            if (originalImage == null) return; 
 
             Bitmap grayImage = new Bitmap(originalImage.Width, originalImage.Height);
 
@@ -38,34 +35,33 @@ namespace Program_2
             {
                 for (int x = 0; x < originalImage.Width; x++)
                 {
-                    Color pixel = originalImage.GetPixel(x, y);  // Отримуємо піксель
-                    int gray = (int)(0.3 * pixel.R + 0.59 * pixel.G + 0.11 * pixel.B);  // Обчислюємо сірий колір
-                    grayImage.SetPixel(x, y, Color.FromArgb(gray, gray, gray));  // Задаємо піксель сірого кольору
+                    Color pixel = originalImage.GetPixel(x, y); 
+                    int gray = (int)(0.3 * pixel.R + 0.59 * pixel.G + 0.11 * pixel.B); 
+                    grayImage.SetPixel(x, y, Color.FromArgb(gray, gray, gray)); 
                 }
             }
 
-            pictureBox1.Image = grayImage;  // Відображаємо перетворене зображення
-            originalImage = grayImage;  // Оновлюємо оригінальне зображення
+            pictureBox1.Image = grayImage; 
+            originalImage = grayImage;  
         }
 
-        // Збереження зображення
         private void button3_Click(object sender, EventArgs e)
         {
-            if (originalImage == null) return;  // Перевірка на null
+            if (originalImage == null) return;  
 
             SaveFileDialog saveDialog = new SaveFileDialog();
-            saveDialog.Filter = "PNG зображення|*.png";  // Формат збереження
+            saveDialog.Filter = "PNG Г§Г®ГЎГ°Г Г¦ГҐГ­Г­Гї|*.png"; 
 
             if (saveDialog.ShowDialog() == DialogResult.OK)
             {
-                originalImage.Save(saveDialog.FileName, System.Drawing.Imaging.ImageFormat.Png);  // Зберігаємо зображення
+                originalImage.Save(saveDialog.FileName, System.Drawing.Imaging.ImageFormat.Png);  
             }
         }
 
-        // Обробник для кліку по PictureBox (якщо потрібно)
+        // ГЋГЎГ°Г®ГЎГ­ГЁГЄ Г¤Г«Гї ГЄГ«ВіГЄГі ГЇГ® PictureBox (ГїГЄГ№Г® ГЇГ®ГІГ°ВіГЎГ­Г®)
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            // Тут нічого не потрібно, якщо тільки не хочете додати якусь додаткову логіку
+            // Г’ГіГІ Г­ВіГ·Г®ГЈГ® Г­ГҐ ГЇГ®ГІГ°ВіГЎГ­Г®, ГїГЄГ№Г® ГІВіГ«ГјГЄГЁ Г­ГҐ ГµГ®Г·ГҐГІГҐ Г¤Г®Г¤Г ГІГЁ ГїГЄГіГ±Гј Г¤Г®Г¤Г ГІГЄГ®ГўГі Г«Г®ГЈВіГЄГі
         }
     }
 }
